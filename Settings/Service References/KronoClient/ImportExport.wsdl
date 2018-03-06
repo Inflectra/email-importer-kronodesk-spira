@@ -1,0 +1,1911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.inflectra.com/KronoDesk/Services/v1.0/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ImportExport" targetNamespace="http://www.inflectra.com/KronoDesk/Services/v1.0/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.inflectra.com/KronoDesk/Services/v1.0/">
+      <xsd:element name="Connection_Authenticate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="userName" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" name="pluginName" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" name="useLicense" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Connection_AuthenticateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="Connection_AuthenticateResult" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Connection_Disconnect">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Connection_DisconnectResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetServerDateTime">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetServerDateTimeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="System_GetServerDateTimeResult" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetWebServerUrl">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetWebServerUrlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="System_GetWebServerUrlResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Product_Retrieve">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="includeDeleted" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Product_RetrieveResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q1="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Product_RetrieveResult" nillable="true" type="q1:ArrayOfRemoteProduct" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_Create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q2="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="remoteUser" nillable="true" type="q2:RemoteUser" />
+            <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" name="passwordQuestion" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" name="passwordAnswer" nillable="true" type="xsd:string" />
+            <xsd:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="roles" nillable="true" type="q3:ArrayOfstring" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_CreateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q4="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="User_CreateResult" nillable="true" type="q4:RemoteUser" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_RetrieveById">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="userId" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_RetrieveByIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q5="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="User_RetrieveByIdResult" nillable="true" type="q5:RemoteUser" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_RetrieveByLogin">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="login" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_RetrieveByLoginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q6="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="User_RetrieveByLoginResult" nillable="true" type="q6:RemoteUser" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_RetrieveByEmailAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="emailAddress" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="User_RetrieveByEmailAddressResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q7="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="User_RetrieveByEmailAddressResult" nillable="true" type="q7:ArrayOfRemoteUser" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_Create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q8="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="remoteTicket" nillable="true" type="q8:RemoteTicket" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_CreateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q9="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Ticket_CreateResult" nillable="true" type="q9:RemoteTicket" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_AddNote">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q10="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="remoteTicketNote" nillable="true" type="q10:RemoteTicketNote" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_AddNoteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q11="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Ticket_AddNoteResult" nillable="true" type="q11:RemoteTicketNote" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_UpdateNote">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q12="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="remoteTicketNote" nillable="true" type="q12:RemoteTicketNote" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_UpdateNoteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q13="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Ticket_UpdateNoteResult" nillable="true" type="q13:RemoteTicketNote" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_Update">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q14="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="remoteTicket" nillable="true" type="q14:RemoteTicket" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Ticket_UpdateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q15="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Ticket_UpdateResult" nillable="true" type="q15:RemoteTicket" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_RetrieveSitemapEntries">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_RetrieveSitemapEntriesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q16="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="System_RetrieveSitemapEntriesResult" nillable="true" type="q16:ArrayOfRemoteSitemapEntry" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetExtensionFromMimeType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="mimeType" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetExtensionFromMimeTypeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="System_GetExtensionFromMimeTypeResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetMimeTypeFromExtension">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="extension" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="System_GetMimeTypeFromExtensionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="System_GetMimeTypeFromExtensionResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Document_AddFile">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q17="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="remoteDocument" nillable="true" type="q17:RemoteDocument" />
+            <xsd:element minOccurs="0" name="binaryData" nillable="true" type="xsd:base64Binary" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Document_AddFileResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q18="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Document_AddFileResult" nillable="true" type="q18:RemoteDocument" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Document_GetForArtifact">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="artType" type="xsd:int" />
+            <xsd:element minOccurs="0" name="artifactId" type="xsd:long" />
+            <xsd:element minOccurs="0" name="includeHash" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Document_GetForArtifactResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q19="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" minOccurs="0" name="Document_GetForArtifactResult" nillable="true" type="q19:ArrayOfRemoteDocument" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xsd:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0">
+      <xsd:complexType name="ServiceFaultMessage">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xsd:appinfo>
+          <xsd:documentation>
+            <comments>
+              <summary>
+            This is structure is used to define the custom soap fault message.
+            Custom SOAP Fault Message class Name :ServiceFaultMessage 
+            </summary>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Message" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The short description of the fault
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="StackTrace" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The detailed stack trace of the error message
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Type" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The type of the fault - normally the full name of the server exception class
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ServiceFaultMessage" nillable="true" type="tns:ServiceFaultMessage" />
+    </xsd:schema>
+    <xsd:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0.DataObjects">
+      <xsd:complexType name="ArrayOfRemoteProduct">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="RemoteProduct" nillable="true" type="tns:RemoteProduct" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfRemoteProduct" nillable="true" type="tns:ArrayOfRemoteProduct" />
+      <xsd:complexType name="RemoteProduct">
+        <xsd:annotation>
+          <xsd:appinfo />
+          <xsd:documentation>
+            <comments>
+              <summary>
+            Represents a single product in the system
+            </summary>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Description" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The long description of the product (optional)
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="IsDeleted" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Whether the product is deleted or not
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The short name of the product
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ProductId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The id of the product
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ProductToken" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The unique abbreviation name (token) for the product
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="WorkflowId" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The id of the workflow associated with the product (used in the help desk system)
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RemoteProduct" nillable="true" type="tns:RemoteProduct" />
+      <xsd:complexType name="RemoteUser">
+        <xsd:annotation>
+          <xsd:appinfo />
+          <xsd:documentation>
+            <comments>
+              <summary>
+            Represents a user in the system
+            </summary>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Active" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Whether the user is active in the system
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Approved" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Is this user approved by the system administrator
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="EmailAddress" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The email address of the user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="FirstName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The first (given) name of the user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="FullName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The full name of the user concatenated (First + Middle + Last)
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LastName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The last name (surname) of the user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LdapDn" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The LDAP Distinguished Name for the user (null for non-LDAP users)
+            </summary>
+                  <remarks>
+            Not currently used by the API
+            </remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Locked" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Is this user locked-out of their account
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Login" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The login used by the user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="MiddleInitial" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The middle initials of the user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="RssToken" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            What is the RSS token for this user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="UserId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The id of the user
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RemoteUser" nillable="true" type="tns:RemoteUser" />
+      <xsd:complexType name="ArrayOfRemoteUser">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="RemoteUser" nillable="true" type="tns:RemoteUser" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfRemoteUser" nillable="true" type="tns:ArrayOfRemoteUser" />
+      <xsd:complexType name="RemoteTicket">
+        <xsd:annotation>
+          <xsd:appinfo />
+          <xsd:documentation>
+            <comments>
+              <summary>
+            Represents a single Ticket artifact in the system
+            </summary>
+              <remarks>
+            This version of the data-object does not support access to the ticket's custom properties
+            </remarks>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="AccessedDate" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The date/time that the ticket was last accessed</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AssigneeId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the user that the ticket is assigned to</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AssigneeUserName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The name of the user that the ticket is assigned to</summary>
+                  <remarks>Read-only</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ClosedDate" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The date/time that the ticket was closed</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ConcurrencyDate" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The concurrency date/time (used to prevent users overwriting each other's changes)</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="CreationDate" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The date/time that the ticket was created</summary>
+                  <remarks>If no date/time is specified, the current UTC date/time is used</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Description" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The description of the ticket</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="HasAttachments" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>Does this ticket have any file attachments</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="IsDeleted" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>Has this ticket been deleted</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LastUpdateDate" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The date/time that the ticket was last updated</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LongDescription" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The description of the ticket, with all the notes concatenated into it</summary>
+                  <remarks>Read-only</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The short name of the ticket</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Notes" nillable="true" type="tns:ArrayOfRemoteTicketNote">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The list of notes attached to the ticket
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="OpenerId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the user that opened the ticket</summary>
+                  <remarks>If no value is specified on creation, the current user is used</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="OpenerUserName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The name of the user that opened the ticket</summary>
+                  <remarks>Read-only</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="PriorityId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the ticket priority</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="PriorityName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The name of the ticket priority</summary>
+                  <remarks>Read-only</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ProductId" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the product that the ticket is associated with</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ProductName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The name of the product that the ticket is associated with</summary>
+                  <remarks>Read-only</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ResolutionId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the ticket resolution</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ResolutionName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The name of the ticket resolution</summary>
+                  <remarks>Read-only</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="StatusId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the ticket status</summary>
+                  <remarks>If no status provided, the default status is used</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="StatusName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The name of the ticket status
+            </summary>
+                  <remarks>
+            Read-only
+            </remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="TicketId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The ticket primary key</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="TypeName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The name of the ticket type
+            </summary>
+                  <remarks>
+            Read-only
+            </remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RemoteTicket" nillable="true" type="tns:RemoteTicket" />
+      <xsd:complexType name="ArrayOfRemoteTicketNote">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="RemoteTicketNote" nillable="true" type="tns:RemoteTicketNote" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfRemoteTicketNote" nillable="true" type="tns:ArrayOfRemoteTicketNote" />
+      <xsd:complexType name="RemoteTicketNote">
+        <xsd:annotation>
+          <xsd:appinfo />
+          <xsd:documentation>
+            <comments>
+              <summary>
+            Represents one note that is attached to a specific ticket
+            </summary>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="AuthorId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The id of the user that created the note
+            </summary>
+                  <remarks>Defaults to the authenticated user if none specified</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="CreationDate" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The date/time that the note was created
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="IsDeleted" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Whether the note has been deleted
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="IsInternalOnly" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Is the note visible to employees only
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ModifiedById" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The id of the user that last modified the note
+            </summary>
+                  <remarks>Defaults to the current UTC date/time if none specified</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ModifiedDate" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The date/time that the note was last modified
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="NoteId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The primary key of the note (null for new notes)
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Text" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The note text
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="TicketId" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The id of the ticket that the note is associated with
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RemoteTicketNote" nillable="true" type="tns:RemoteTicketNote" />
+      <xsd:complexType name="ArrayOfRemoteSitemapEntry">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="RemoteSitemapEntry" nillable="true" type="tns:RemoteSitemapEntry" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfRemoteSitemapEntry" nillable="true" type="tns:ArrayOfRemoteSitemapEntry" />
+      <xsd:complexType name="RemoteSitemapEntry">
+        <xsd:annotation>
+          <xsd:appinfo />
+          <xsd:documentation>
+            <comments>
+              <summary>
+            Represents a single SEO sitemap entry
+            </summary>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="CreationDate" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The date the page was created
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="IsDynamic" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            Is the page dynamic and changes frequently
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LastModified" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The date the page was last modified
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Url" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>
+            The URL of the page, relative to the application
+            </summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RemoteSitemapEntry" nillable="true" type="tns:RemoteSitemapEntry" />
+      <xsd:complexType name="RemoteDocument">
+        <xsd:annotation>
+          <xsd:appinfo />
+          <xsd:documentation>
+            <comments>
+              <summary>Represents a document (attachment/url) in the system</summary>
+            </comments>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="ArtifactId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the artifact it's being attached to</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ArtifactTypeId" nillable="true" type="xsd:int">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the type of artifact it's attached to</summary>
+                  <remarks>None = -1,
+            Forum = 1,
+            Thread = 2,
+            Message = 3,
+            User = 4,
+            Article = 5,
+            Ticket = 6,
+            Placeholder = 7</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AttachmentId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the attachment</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AttachmentTypeId" type="xsd:int">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the attachment type</summary>
+                  <remarks>File = 1, 
+            URL = 2</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AuthorId" nillable="true" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The id of the user that uploaded the attachment</summary>
+                  <remarks>If no value is provided, the authenticated user is used</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AuthorName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The display name of the user that uploaded the attachment</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Description" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The description of the attachment</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="DocumentURL" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>Returns the url to directly access the document.</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="FilenameOrUrl" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The filename of the file (if a file attachment) or the full URL if a URL attachment</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Hash" nillable="true" type="xsd:base64Binary">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The MD5 hash of the file's contents.</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Size" type="xsd:long">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The size of the attachment in bytes</summary>
+                  <remarks>Pass 0 for a URL attachment</remarks>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="UploadDate" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo />
+              <xsd:documentation>
+                <comments>
+                  <summary>The date/time the attachment was uploaded</summary>
+                </comments>
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RemoteDocument" nillable="true" type="tns:RemoteDocument" />
+      <xsd:complexType name="ArrayOfRemoteDocument">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="RemoteDocument" nillable="true" type="tns:RemoteDocument" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfRemoteDocument" nillable="true" type="tns:ArrayOfRemoteDocument" />
+    </xsd:schema>
+    <xsd:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IImportExport_Connection_Authenticate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connection_Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Connection_Authenticate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Connection_AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Connection_Authenticate_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q20:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Connection_Disconnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connection_Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Connection_Disconnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Connection_DisconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Connection_Disconnect_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q21="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q21:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetServerDateTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetServerDateTime" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetServerDateTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetServerDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetServerDateTime_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q22:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetWebServerUrl_InputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetWebServerUrl" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetWebServerUrl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetWebServerUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetWebServerUrl_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q23="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q23:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Product_Retrieve_InputMessage">
+    <wsdl:part name="parameters" element="tns:Product_Retrieve" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Product_Retrieve_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Product_RetrieveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Product_Retrieve_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q24="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q24:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_Create" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_Create_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q25:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveById_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_RetrieveById" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_RetrieveByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveById_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q26:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_RetrieveByLogin" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_RetrieveByLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveByLogin_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q27:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveByEmailAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_RetrieveByEmailAddress" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveByEmailAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_RetrieveByEmailAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_User_RetrieveByEmailAddress_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q28="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q28:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_Create" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_Create_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q29="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q29:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_AddNote_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_AddNote" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_AddNote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_AddNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_AddNote_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q30="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q30:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_UpdateNote_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_UpdateNote" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_UpdateNote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_UpdateNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_UpdateNote_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q31="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q31:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_Update_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_Update" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_Update_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Ticket_UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Ticket_Update_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q32="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q32:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_RetrieveSitemapEntries_InputMessage">
+    <wsdl:part name="parameters" element="tns:System_RetrieveSitemapEntries" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_RetrieveSitemapEntries_OutputMessage">
+    <wsdl:part name="parameters" element="tns:System_RetrieveSitemapEntriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_RetrieveSitemapEntries_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q33="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q33:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetExtensionFromMimeType_InputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetExtensionFromMimeType" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetExtensionFromMimeType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetExtensionFromMimeTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetExtensionFromMimeType_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q34="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q34:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetMimeTypeFromExtension_InputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetMimeTypeFromExtension" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetMimeTypeFromExtension_OutputMessage">
+    <wsdl:part name="parameters" element="tns:System_GetMimeTypeFromExtensionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_System_GetMimeTypeFromExtension_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q35="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q35:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Document_AddFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:Document_AddFile" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Document_AddFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Document_AddFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Document_AddFile_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q36="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q36:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Document_GetForArtifact_InputMessage">
+    <wsdl:part name="parameters" element="tns:Document_GetForArtifact" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Document_GetForArtifact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Document_GetForArtifactResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportExport_Document_GetForArtifact_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q37="http://schemas.datacontract.org/2004/07/Inflectra.KronoDesk.Web.Services.v1_0" name="detail" element="q37:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:portType name="IImportExport">
+    <wsdl:documentation>
+      <comments>
+        <summary>This web service enables the import and export of data to/from the system. Each function is prefixed by the area of the system that it relates to. For example, the Ticket_Retrieve function relates to the Help Desk module.</summary>
+        <summary>This web service enables the import and export of data to/from the system. Each function is prefixed by the area of the system that it relates to. For example, the Ticket_Retrieve function relates to the Help Desk module.</summary>
+        <summary>This web service enables the import and export of data to/from the system. Each function is prefixed by the area of the system that it relates to. For example, the Ticket_Retrieve function relates to the Help Desk module.</summary>
+        <summary>This web service enables the import and export of data to/from the system. Each function is prefixed by the area of the system that it relates to. For example, the Ticket_Retrieve function relates to the Help Desk module.</summary>
+        <summary>This web service enables the import and export of data to/from the system. Each function is prefixed by the area of the system that it relates to. For example, the Ticket_Retrieve function relates to the Help Desk module.</summary>
+      </comments>
+    </wsdl:documentation>
+    <wsdl:operation name="Connection_Authenticate">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Authenticates against the server. Need to call before using other methods
+            </summary>
+          <param name="userName">The username of the user</param>
+          <param name="password">The unhashed password of the user</param>
+          <returns>Whether authentication was successful or not</returns>
+          <param name="pluginName">The name of the plugin</param>
+          <param name="useLicense">Does this user consume a concurrent-user license</param>
+          <remarks>Also checks to make sure they have enough connection licenses</remarks>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_Authenticate" message="tns:IImportExport_Connection_Authenticate_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_AuthenticateResponse" message="tns:IImportExport_Connection_Authenticate_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_AuthenticateServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Connection_Authenticate_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Connection_Disconnect">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Disconnects the currenly authenticated / authorized user
+            </summary>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_Disconnect" message="tns:IImportExport_Connection_Disconnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_DisconnectResponse" message="tns:IImportExport_Connection_Disconnect_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_DisconnectServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Connection_Disconnect_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="System_GetServerDateTime">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Retrieves the current date-time on the server in UTC
+            </summary>
+          <returns>The current UTC date-time</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetServerDateTime" message="tns:IImportExport_System_GetServerDateTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetServerDateTimeResponse" message="tns:IImportExport_System_GetServerDateTime_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetServerDateTimeServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_System_GetServerDateTime_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="System_GetWebServerUrl">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Gets the base URL of the website that the system is running under. Used for notifications and exported artifacts
+            </summary>
+          <returns>The URL</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetWebServerUrl" message="tns:IImportExport_System_GetWebServerUrl_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetWebServerUrlResponse" message="tns:IImportExport_System_GetWebServerUrl_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetWebServerUrlServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_System_GetWebServerUrl_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Product_Retrieve">
+      <wsdl:documentation>
+        <comments>
+          <summary>Retrieves a list of products in the system</summary>
+          <param name="includeDeleted">Do we want to include deleted products</param>
+          <returns>List of products</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Product_Retrieve" message="tns:IImportExport_Product_Retrieve_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Product_RetrieveResponse" message="tns:IImportExport_Product_Retrieve_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Product_RetrieveServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Product_Retrieve_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_Create">
+      <wsdl:documentation>
+        <comments>
+          <summary>Creates a new user (with profile) in the system and adds them to the specified roles</summary>
+          <param name="password">The new password for the user (leave empty if an LDAP user)</param>
+          <param name="passwordQuestion">The new password retrieval question for the user (leave empty if an LDAP user)</param>
+          <param name="passwordAnswer">The new password retrieval answer for the user (leave empty if an LDAP user)</param>
+          <param name="remoteUser">The new user object (primary key will be empty)</param>
+          <param name="roles">The list of roles to add the user to</param>
+          <returns>The populated user object - including the primary key</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_Create" message="tns:IImportExport_User_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_CreateResponse" message="tns:IImportExport_User_Create_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_CreateServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_User_Create_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_RetrieveById">
+      <wsdl:documentation>
+        <comments>
+          <summary>Retrieves a single user in the system</summary>
+          <param name="userId">The id of the user</param>
+          <returns>The user object</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveById" message="tns:IImportExport_User_RetrieveById_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByIdResponse" message="tns:IImportExport_User_RetrieveById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByIdServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_User_RetrieveById_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_RetrieveByLogin">
+      <wsdl:documentation>
+        <comments>
+          <summary>Retrieves a single user in the system bh its login</summary>
+          <param name="login">The login of the user</param>
+          <returns>The user object</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByLogin" message="tns:IImportExport_User_RetrieveByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByLoginResponse" message="tns:IImportExport_User_RetrieveByLogin_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByLoginServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_User_RetrieveByLogin_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_RetrieveByEmailAddress">
+      <wsdl:documentation>
+        <comments>
+          <summary>Retrieves a list of users that have a specific email address</summary>
+          <param name="emailAddress">The email address</param>
+          <returns>List of matching users</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByEmailAddress" message="tns:IImportExport_User_RetrieveByEmailAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByEmailAddressResponse" message="tns:IImportExport_User_RetrieveByEmailAddress_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByEmailAddressServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_User_RetrieveByEmailAddress_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_Create">
+      <wsdl:documentation>
+        <comments>
+          <summary>Creates a new ticket in the system</summary>
+          <param name="remoteTicket">The new ticket</param>
+          <returns>The fully populated ticket object</returns>
+          <remarks>This function does not currently add notes to the ticket, even if provided</remarks>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_Create" message="tns:IImportExport_Ticket_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_CreateResponse" message="tns:IImportExport_Ticket_Create_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_CreateServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Ticket_Create_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_AddNote">
+      <wsdl:documentation>
+        <comments>
+          <summary>Adds a new note to an existing ticket</summary>
+          <param name="remoteTicketNote">The new ticket note</param>
+          <returns>The ticket note with primary key populated</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_AddNote" message="tns:IImportExport_Ticket_AddNote_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_AddNoteResponse" message="tns:IImportExport_Ticket_AddNote_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_AddNoteServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Ticket_AddNote_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_UpdateNote">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Updates an existing note in the system
+            </summary>
+          <param name="remoteTicketNote">The populated note</param>
+          <returns>The updated note</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_UpdateNote" message="tns:IImportExport_Ticket_UpdateNote_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_UpdateNoteResponse" message="tns:IImportExport_Ticket_UpdateNote_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_UpdateNoteServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Ticket_UpdateNote_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_Update">
+      <wsdl:documentation>
+        <comments>
+          <summary>Updates a ticket in the system.</summary>
+          <param name="remoteTicket">The remote ticket to update.</param>
+          <returns>A copy of the updated ticket.</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_Update" message="tns:IImportExport_Ticket_Update_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_UpdateResponse" message="tns:IImportExport_Ticket_Update_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_UpdateServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Ticket_Update_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="System_RetrieveSitemapEntries">
+      <wsdl:documentation>
+        <comments>
+          <summary>Retrieves a list of publicly accessible web page urls, used in SEO sitemaps</summary>
+          <returns>The list of sitemap urls</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_RetrieveSitemapEntries" message="tns:IImportExport_System_RetrieveSitemapEntries_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_RetrieveSitemapEntriesResponse" message="tns:IImportExport_System_RetrieveSitemapEntries_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_RetrieveSitemapEntriesServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_System_RetrieveSitemapEntries_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="System_GetExtensionFromMimeType">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Returns the extension for a mime-type (e.g. "image/gif")
+            </summary>
+          <param name="mimeType">The mime type</param>
+          <returns>The corresponding Windows file extension (e.g. "gif")</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetExtensionFromMimeType" message="tns:IImportExport_System_GetExtensionFromMimeType_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetExtensionFromMimeTypeResponse" message="tns:IImportExport_System_GetExtensionFromMimeType_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetExtensionFromMimeTypeServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_System_GetExtensionFromMimeType_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="System_GetMimeTypeFromExtension">
+      <wsdl:documentation>
+        <comments>
+          <summary>
+            Returns the mime type for a file extension
+            </summary>
+          <param name="extension">The Windows file extension (e.g. "gif")</param>
+          <returns>The corresponding MIME type (e.g. "image/gif")</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetMimeTypeFromExtension" message="tns:IImportExport_System_GetMimeTypeFromExtension_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetMimeTypeFromExtensionResponse" message="tns:IImportExport_System_GetMimeTypeFromExtension_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetMimeTypeFromExtensionServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_System_GetMimeTypeFromExtension_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Document_AddFile">
+      <wsdl:documentation>
+        <comments>
+          <summary>Adds a new document (file) into the system and associates it with the provided artifact (optional) and project folder/type (optional)</summary>
+          <param name="remoteDocument">The new document object (primary key will be empty)</param>
+          <param name="binaryData">A byte-array containing the attachment itself in binary form</param>
+          <returns>The populated document object - including the primary key and default values for project attachment type and project folder if they were not specified</returns>
+          <example>byte[] attachmentData = unicodeEncoding.GetBytes("Test Attachment Data To Be Stored");
+            RemoteDocument remoteDocument = new RemoteDocument();
+            remoteDocument.FilenameOrUrl = "test_data.xls";
+            remoteDocument.Description = "Sample Test Case Attachment";
+            remoteDocument.AuthorId = userId2;
+            remoteDocument.ArtifactId = testCaseId1;
+            remoteDocument.ArtifactTypeId = (int)DataModel.Artifact.ArtifactTypeEnum.TestCase;
+            attachmentId1 = spiraImportExport.Document_AddFile(remoteDocument, attachmentData).AttachmentId.Value;</example>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_AddFile" message="tns:IImportExport_Document_AddFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_AddFileResponse" message="tns:IImportExport_Document_AddFile_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_AddFileServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Document_AddFile_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Document_GetForArtifact">
+      <wsdl:documentation>
+        <comments>
+          <summary>Gets a list of attached documents to an item.</summary>
+          <param name="artType">The type of the artifact. Valid values for docuemtns are:
+            5 = Article
+            6 = Ticket</param>
+          <param name="artifactId">The artifact's ID.</param>
+          <param name="includeHash">Witehr to include file size and hash information.</param>
+          <returns>A list of RemoteDocuments. Empty (count=0) list if no attachments. Will throw error if artifact does not exist.</returns>
+        </comments>
+      </wsdl:documentation>
+      <wsdl:input wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_GetForArtifact" message="tns:IImportExport_Document_GetForArtifact_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_GetForArtifactResponse" message="tns:IImportExport_Document_GetForArtifact_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_GetForArtifactServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IImportExport_Document_GetForArtifact_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IImportExport" type="tns:IImportExport">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Connection_Authenticate">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Connection_Disconnect">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/Connection_Disconnect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="System_GetServerDateTime">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetServerDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="System_GetWebServerUrl">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IService/System_GetWebServerUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Product_Retrieve">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Product_Retrieve" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="User_Create">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="User_RetrieveById">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="User_RetrieveByLogin">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="User_RetrieveByEmailAddress">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/User_RetrieveByEmailAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_Create">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_AddNote">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_AddNote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_UpdateNote">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_UpdateNote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Ticket_Update">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Ticket_Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="System_RetrieveSitemapEntries">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_RetrieveSitemapEntries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="System_GetExtensionFromMimeType">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetExtensionFromMimeType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="System_GetMimeTypeFromExtension">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/System_GetMimeTypeFromExtension" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Document_AddFile">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_AddFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Document_GetForArtifact">
+      <soap:operation soapAction="http://www.inflectra.com/KronoDesk/Services/v1.0/IImportExport/Document_GetForArtifact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImportExport">
+    <wsdl:port name="BasicHttpBinding_IImportExport" binding="tns:BasicHttpBinding_IImportExport">
+      <soap:address location="http://localhost/kronodesk/Services/v1_0/ImportExport.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

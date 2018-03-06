@@ -1,2 +1,31 @@
 # email-importer-kronodesk-spira
 The email importer application for SpiraTeam and KronoDesk
+
+11/13/2012 (1.0.1.15413)
+==========
+! Fixed issue where loop may crash when finding message with illegal date.
++ Added meta properties to DLLs.
+
+11/26/2012 (1.0.1.15425)
+==========
+! Fixed issue where logging an email could overflow Event log, and cause emails to stop being processed.
+
+12/10/2012 (1.0.1.15510)
+==========
+! Fixed issue where bad emails could cause SQL Truncation issues.
+
+1/2/2013 (1.0.1.15602)
+========
+! Fixes issue where emails can get imported with no subject, causing error during creation of new items.
+
+2/13/2013 (1.0.1.15713)
+=========
+! Fixes issue where timeout from POP3 server could cause message re-processing.
+! Fixes issue where message containint artifact for deleted artifact would prematurely stop processing.
+! Fixes speed issue with regexing content of emails for Products/Projects.
+! Fixes issue where Regex content was always enabled.
+
+2/26/2013 (1.0.2.15820)
+=========
+! Fixes issue where if user is locked out, messages would stop processing.
++ Add option to import despite having empty Return-Path: header.
