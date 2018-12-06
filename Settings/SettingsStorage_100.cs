@@ -15,14 +15,14 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 		public SettingsStorage_100()
 		{
 			//Initialize defaults.
-			this.Email_Accounts = new List<EmailAccount>();
-			this.Application_Servers = new List<ApplicationSystem>();
-			this.PollInterval = Common.SETTINGS_DEFAULT_POLLINTERVAL;
-			this.EnableTrace = Common.SETTINGS_DEFAULT_TRACE;
-			this.Settings_Version = CONFIG_VERSION;
-			this.Ignore_Addresses = new List<string>();
-			this.Ignore_Headers = new List<string>();
-			this.Ignore_Words = new List<string>();
+			Email_Accounts = new List<AccountDetails>();
+			Application_Servers = new List<ApplicationSystem>();
+			PollInterval = Common.SETTINGS_DEFAULT_POLLINTERVAL;
+			EnableTrace = Common.SETTINGS_DEFAULT_TRACE;
+			Settings_Version = CONFIG_VERSION;
+			Ignore_Addresses = new List<string>();
+			Ignore_Headers = new List<string>();
+			Ignore_Words = new List<string>();
 		}
 
 		/// <summary>Whether the application has been initialized or not.</summary>
@@ -34,7 +34,7 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 		{ get; set; }
 
 		/// <summary>The list of configured email accounts.</summary>
-		public List<EmailAccount> Email_Accounts
+		public List<AccountDetails> Email_Accounts
 		{ get; set; }
 
 		/// <summary>The list of server definiitions.</summary>
@@ -50,9 +50,9 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 				//Figure the highest number. 
 				int retInt = 0;
 
-				if (this.Email_Accounts != null && this.Email_Accounts.Count > 1)
+				if (Email_Accounts != null && Email_Accounts.Count > 1)
 				{
-					EmailAccount acct = this.Email_Accounts.OrderByDescending(em => em.AccountID).First();
+					AccountDetails acct = Email_Accounts.OrderByDescending(em => em.AccountID).First();
 					retInt = acct.AccountID.Value;
 				}
 
@@ -69,9 +69,9 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 				//Figure the highest number. 
 				int retInt = 0;
 
-				if (this.Application_Servers != null && this.Application_Servers.Count > 1)
+				if (Application_Servers != null && Application_Servers.Count > 1)
 				{
-					ApplicationSystem app = this.Application_Servers.OrderByDescending(em => em.ServerID).First();
+					ApplicationSystem app = Application_Servers.OrderByDescending(em => em.ServerID).First();
 					retInt = app.ServerID.Value;
 				}
 
@@ -131,10 +131,10 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 	}
 
 	/// <summary>Class containing details on an email account.</summary>
-	public class EmailAccount
+	public class AccountDetails
 	{
 		/// <summary>Initializes the class.</summary>
-		public EmailAccount()
+		public AccountDetails()
 		{ }
 
 		/// <summary>The unique Account ID.</summary>
@@ -153,6 +153,10 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 		/// <summary>Whether to use SSL or not.</summary>
 		public bool UseSSL
 		{ get; set; }
+
+        public string SSLVersion
+        { get; set; }
+
 		#endregion
 
 		#region Account Settings
@@ -234,9 +238,9 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 		{
 			get
 			{
-				if (this.ServerType == ApplServerTypeEnum.Spira)
+				if (ServerType == ApplServerTypeEnum.Spira)
 					return IMG_SPIRA;
-				else if (this.ServerType == ApplServerTypeEnum.Krono)
+				else if (ServerType == ApplServerTypeEnum.Krono)
 					return IMG_KRONO;
 				else
 					return "";
@@ -250,15 +254,15 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 			get
 			{
 				string APIreference = "";
-				if (this.ServerType == ApplServerTypeEnum.Spira)
+				if (ServerType == ApplServerTypeEnum.Spira)
 					APIreference = ClientFactory.SPIRA_API;
-				else if (this.ServerType == ApplServerTypeEnum.Krono)
+				else if (ServerType == ApplServerTypeEnum.Krono)
 					APIreference = ClientFactory.KRONO_API;
 
 				//Remove trailing slash, if necessary.
-				if (this.ServerURL.EndsWith("/")) this.ServerURL = this.ServerURL.Trim('/');
+				if (ServerURL.EndsWith("/")) ServerURL = ServerURL.Trim('/');
 
-				return this.ServerURL + APIreference;
+				return ServerURL + APIreference;
 			}
 		}
 
@@ -268,9 +272,9 @@ namespace Inflectra.KronoDesk.Service.Email.Settings
 		{
 			get
 			{
-				if (this.ServerType == ApplServerTypeEnum.Krono)
+				if (ServerType == ApplServerTypeEnum.Krono)
 					return "KronoDesk";
-				else if (this.ServerType == ApplServerTypeEnum.Spira)
+				else if (ServerType == ApplServerTypeEnum.Spira)
 					return "SpiraTeam";
 				else
 					return "";

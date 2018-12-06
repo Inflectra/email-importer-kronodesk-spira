@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="FC704178-9C92-44C9-9A8F-3022E23E1846" Name="Inflectra Email Integration for KronoDesk and SpiraTeam"
+    Language="1033" Version="2.0.0.0" Manufacturer="Inflectra"
+    UpgradeCode="ff82e26e-53a9-4c10-b0a9-f8c6e8b3d0d4">
+    
+		<Package Id="*" InstallerVersion="300" Compressed="yes" />
+
+    <Condition Message=
+"You need to be an administrator to install this product.">
+      Privileged
+    </Condition>
+    <Condition Message=
+"This setup requires the .NET Framework 4.5 or higher.">
+      <![CDATA[MsiNetAssemblySupport >= "4.0.30319"]]>
+    </Condition>
+
+    <Media Id="1" Cabinet="EmailIntegration.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="D_MyCompany" Name="Inflectra">
+          <Directory Id="INSTALLDIR" Name="Email Integration">
+            <Component Id="C_MainExecutable" Guid="463A700D-FDD6-4FF8-AEB9-09BF9290935E">
+              <File Id="F_InflectraEmailIntegration_exe" Name="InflectraEmailIntegration.exe"
+               Source="..\_Output\Release\InflectraEmailIntegration.exe" Vital="yes">
+                <Shortcut Id="S_ApplicationShortcut" Directory="ProgramMenuProductDirTools"
+                 Name="Inflectra Email Integration" WorkingDirectory="INSTALLDIR"
+                 Icon="App.ico" IconIndex="0" Advertise="yes" />
+              </File>
+              <File Id="F_Inflectra_POP3_dll" Name="Inflectra.POP3.dll"
+                      Source="..\_Output\Release\Inflectra.POP3.dll" />
+              <File Id="F_Common_dll" Name="Common.dll"
+                      Source="..\_Output\Release\Common.dll" />
+              <RemoveFolder Id="INSTALLDIR" On="uninstall" />
+            </Component>
+            <Component Id="C_BackgroundService" Guid="DFFAD78A-5B9D-4C5F-9422-C24654C170EC">
+              <File Id="F_InflectraEmailIntegrationService_exe" Name="InflectraEmailIntegrationService.exe"
+                Source="..\_Output\Release\InflectraEmailIntegrationService.exe" Vital="yes">
+              </File>
+              <ServiceInstall
+                Id="ServiceInstaller"
+                Type="ownProcess"
+                Vital="yes"
+                Name="InflectraEmailIntegrationService"
+                DisplayName="Inflectra Email Integration Service"
+                Description="Background service that polls configured email accounts for new items and then loads them into instances of KronoDesk or SpiraTeam."
+                Start="auto"
+                Account="LocalSystem"
+                ErrorControl="ignore"
+                Interactive="no"
+              >
+                <!--
+                <ServiceDependency Id="QSM"/>
+                <ServiceDependency Id="pdl"/>
+                <ServiceDependency Id="WHSTransportService"/>-->
+              </ServiceInstall>
+              <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="InflectraEmailIntegrationService" Wait="yes" />
+            </Component>
+            <Directory Id="D_Dtd" Name="dtd">
+              <Component Id="C_Dtd" Guid="C5CE6C4D-1CDC-4D56-A201-8A4599747B38">
+                <File Id="F_XHtml1_Transitional_dtd" Name="xhtml1-transitional.dtd" Source="..\_Output\Release\dtd\xhtml1-transitional.dtd" />
+                <File Id="F_XHtml_Lat1_ent" Name="xhtml-lat1.ent" Source="..\_Output\Release\dtd\xhtml-lat1.ent" />
+                <File Id="F_XHtml_Special_ent" Name="xhtml-special.ent" Source="..\_Output\Release\dtd\xhtml-special.ent" />
+                <File Id="F_XHtml_Symbol_ent" Name="xhtml-symbol.ent" Source="..\_Output\Release\dtd\xhtml-symbol.ent" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="Inflectra">
+          <Directory Id="ProgramMenuProductDir" Name="SpiraTeam">
+            <Directory Id="ProgramMenuProductDirTools" Name="Tools">
+              <Component Id="C_ProgramMenuDir" Guid="C738B12B-0387-4E5A-8430-18F19558B4D5">
+                <RemoveFolder Id="RemoveProgramMenuDir" Directory="ProgramMenuDir" On="uninstall" />
+                <RemoveFolder Id="RemoveProgramMenuProductDir" Directory="ProgramMenuProductDir" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]"
+                 Type="string" Value="" KeyPath="yes" />
+                <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Icon Id="App.ico" SourceFile="App.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="App.ico" />
+
+    <Feature Id="Complete" Level="1">
+      <ComponentRef Id="C_MainExecutable" />
+      <ComponentRef Id="C_ProgramMenuDir" />
+      <ComponentRef Id="C_BackgroundService" />
+      <ComponentRef Id="C_Dtd" />
+    </Feature>
+
+    <WixVariable Id="WixUIBannerBmp" Value="bannrbmp.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="dlgbmp.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+
+    <!-- This will ensure that the LaunchConditions
+  are executed only after searching -->
+    <InstallUISequence>
+      <LaunchConditions After="AppSearch" />
+    </InstallUISequence>
+    <InstallExecuteSequence>
+      <LaunchConditions After="AppSearch" />
+    </InstallExecuteSequence>
+    
+	</Product>
+</Wix>

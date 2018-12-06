@@ -1,0 +1,368 @@
+﻿<Window x:Class="Inflectra.KronoDesk.Service.Email.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:my="clr-namespace:Inflectra.KronoDesk.Service.Email.UI"  
+        xmlns:classes="clr-namespace:Inflectra.KronoDesk.Service.Email.UI.Classes"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:settings="clr-namespace:Inflectra.KronoDesk.Service.Email.Settings;assembly=Common"
+        xmlns:service_s="clr-namespace:Inflectra.KronoDesk.Service.Email.Settings.SpiraClient;assembly=Common"
+        xmlns:service_k="clr-namespace:Inflectra.KronoDesk.Service.Email.Settings.KronoClient;assembly=Common"
+        Title="Inflectra | Emailing Polling System for KronoDesk and SpiraTeam" 
+		Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+		Height="Auto" Width="Auto"
+        MinHeight="600" 
+        MaxWidth="600"
+        SizeToContent="WidthAndHeight"
+		Closing="window_Closing">
+
+    <Window.Resources>
+        <classes:PercentConverter x:Key="PercentConverter" />
+        <DataTemplate DataType="{x:Type settings:ApplicationSystem}">
+            <Grid Margin="0,4,0,4" MouseLeftButtonDown="lstApplicationServersItem_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Width="16" Height="16" SnapsToDevicePixels="True" Source="{Binding Path=ServerIconResource, Mode=OneWay}" Margin="3" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0" Text="{Binding Path=ServerURL, Mode=OneWay}" FontWeight="Bold" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=FontSize, Converter={StaticResource PercentConverter}, ConverterParameter=1.15}" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0">
+                        <Run Text="Type:" />
+                        <Run Text="{Binding Path=ServerTypeString,Mode=OneWay}" FontWeight="Bold" /><TextBlock Text=";" />
+                        <Run Text="User:" />
+                        <Run Text="{Binding Path=UserID, Mode=OneWay}" FontWeight="Bold" />
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type service_s:RemoteProject}">
+            <StackPanel Orientation="Horizontal" Margin="2">
+                <TextBlock Height="Auto" VerticalAlignment="Center">
+					<Run Text="{Binding Path=Name}" /><Run Text=" [PR:" /><Run Text="{Binding Path=ProjectId}" /><Run Text="]" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type service_k:RemoteProduct}">
+            <StackPanel Orientation="Horizontal" Margin="2">
+                <TextBlock Height="Auto" VerticalAlignment="Center"  ToolTip="{Binding Path=Description}">
+					<Run Text="{Binding Path=Name}" /><Run Text=" [PR:" /><Run Text="{Binding Path=ProductId}" /><Run Text="]" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type settings:AccountDetails}">
+            <StackPanel Orientation="Horizontal" Margin="2" MouseLeftButtonDown="lstEmailAccountsItem_MouseLeftButtonDown">
+                <Image Width="16" Height="16" SnapsToDevicePixels="True" Source="/InflectraEmailIntegration;component/Images/ico_email.png" Margin="3" />
+                <TextBlock Height="Auto" VerticalAlignment="Center">
+					<Run Text="{Binding Path=AccountEmail}" /> [<Run Text="{Binding Path=ServerNameOrIP}" />:<Run Text="{Binding Path=ServerPort}" />]
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel LastChildFill="True" Margin="3">
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+            <Button DockPanel.Dock="Right" Name="btnCommit"  Content="Save" Padding="10,3,10,3" Margin="3,3,0,3"  IsDefault="True" Click="btnSave_Clicked" IsEnabled="False" />
+            <Button DockPanel.Dock="Left" Name="btnClose"  Content="Close" Padding="3" Margin="0,3,3,3" Width="{Binding ElementName=btnCommit,Path=ActualWidth}" Click="btnClose_Click" />
+        </DockPanel>
+        <TabControl Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Name="tabControl" Width="Auto" SelectionChanged="tabPanel_Changed">
+            <TabItem Header="Application Servers" Name="tabServers" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                <DockPanel LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Margin="8">
+                        <Run>Application servers define the systems that EMails can be imported in to. You must have at least one application server defined before you can create and configure any EMail accounts. If you remove an application server than is linked to an EMail account, the EMail account will be marked Inactive.</Run>
+                        <LineBreak />
+                        <LineBreak />
+                        <Run>Click the Add button to add a server, and the Delete button to remove the selected server. Double-click on a server to edit its configuration.</Run>
+                    </TextBlock>
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+                        <Button Name="btnDelApp" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="3" Margin="0,3,3,3" IsEnabled="False" Click="btnDelApp_Click">
+                            <Image Source="/InflectraEmailIntegration;component/Images/ico_delete.png" SnapsToDevicePixels="True" MaxHeight="16" MaxWidth="16">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                        <Button Name="btnAddApp" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="3" Margin="0,3,3,3" Click="btnAddApp_Click">
+                            <Image SnapsToDevicePixels="True" MaxHeight="16" MaxWidth="16" Source="/InflectraEmailIntegration;component/Images/ico_add.png">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                    </StackPanel>
+                    <ListBox HorizontalAlignment="Stretch" Name="lstApplicationServers" VerticalAlignment="Stretch" Margin="3" MinWidth="150" MinHeight="100" SelectionChanged="lstApplicationServers_SelectionChanged"  />
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="EMail Accounts" Name="tabEmailServer">
+                <DockPanel LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Margin="8">
+                        <Run>Email accounts define the accounts that are polled for incoming emails. Email accounts are then assigned to a specific Application Server and default Project (for Spira applications) or Product (for KronoDesk applications).</Run>
+                        <LineBreak />
+                        <LineBreak />
+                        <Run>Click the Add button to add an account, and the Delete button to remove the selected email account. Double-click on an account to edit its configuration.</Run>
+                    </TextBlock>
+                    <DockPanel LastChildFill="True" Grid.Row="0" Grid.Column="1" >
+                        <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+                            <Button Name="btnDelEmail" DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="3" Margin="0,3,3,3" IsEnabled="False" Click="btnDelEmail_Click">
+                                <Image Source="/InflectraEmailIntegration;component/Images/ico_delete.png" SnapsToDevicePixels="True" MaxHeight="16" MaxWidth="16">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Opacity" Value="0.5" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Button>
+                            <Button Name="btnAddEmail" DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="3" Margin="0,3,3,3" Click="btnAddEmail_Click">
+                                <Image SnapsToDevicePixels="True" MaxHeight="16" MaxWidth="16" Source="/InflectraEmailIntegration;component/Images/ico_add.png">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Opacity" Value="0.5" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Button>
+                        </StackPanel>
+                        <ListBox HorizontalAlignment="Stretch" Name="lstEmailAccounts" VerticalAlignment="Stretch" Margin="3" MinWidth="150" MinHeight="100" SelectionChanged="lstEmailAccounts_SelectionChanged" />
+                    </DockPanel>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Advanced Settings" Name="tabGeneral" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Enable Trace Logging:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2" ToolTip="Enables trace logging to the Application Event log." />
+                    <CheckBox Grid.Column="1" Grid.Row="0" Name="chkTrace" Checked="chkTrace_Checked" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Enables trace logging to the Application Event log." />
+                    <Label Grid.Column="0" Grid.Row="1" Content="Minutes between polls:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2" ToolTip="The number of minutes between cycles in polling accounts." />
+                    <TextBox Grid.Column="1" Grid.Row="1" Name="txtMinutes" HorizontalAlignment="Left" VerticalAlignment="Center" Height="Auto" Width="75" ToolTip="The number of minutes between cycles in polling accounts." PreviewTextInput="TextBox_PreviewTextInput_IsNumber" TextChanged="TextBox_TextChanged" Margin="0,0,0,8" />
+                    <Label Grid.Column="0" Grid.Row="2" Content="Allow Empty Return-Path:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2,0,2" ToolTip="If checked, emails with empty return-paths will be imported. Otherwise, empty return-paths are thought to be smap and won't be imported." />
+                    <CheckBox Grid.Column="1" Grid.Row="2" Name="chkAllowEmptyRetPath" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="If checked, emails with empty return-paths will be imported. Otherwise, empty return-paths are thought to be smap and won't be imported." Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" />
+                    <TabControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <TabItem Header="Ignore Addresses" Name="tabIgnAddresses" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" VerticalAlignment="Stretch" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="0,0,0,3" >
+									Any messages coming from an email address listed below will be ignored. They will not be imported and they will not be deleted from the POP server. Wildcard or partial entries will not work, only full email addresses will be matched.
+									<LineBreak />This covers all polling email accounts and application servers.
+                                </TextBlock>
+                                <Label Grid.Column="0" Grid.Row="1" Content="Add Email Address:" Height="Auto" />
+                                <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True">
+                                    <Button Name="btnAddIgnEmail" Margin="3,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Center" Height="Auto" IsEnabled="False" Click="btnAddIgnEmail_Click">
+                                        <Image SnapsToDevicePixels="True" Width="16" Height="16" Source="/InflectraEmailIntegration;component/Images/ico_add.png">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter Property="Opacity" Value="0.5" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    <TextBox Name="txtNewIgnEmail" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="Auto" TextChanged="txtNewIgnEmail_TextChanged" />
+                                </DockPanel>
+                                <DockPanel Grid.Column="1" Grid.Row="2"  LastChildFill="True" >
+                                    <Button Name="btnDelIgnEmail" Margin="3,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Top" Height="Auto" IsEnabled="False" Click="btnDelIgnEmail_Click">
+                                        <Image SnapsToDevicePixels="True" Width="16" Height="16" Source="/InflectraEmailIntegration;component/Images/ico_delete.png">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter Property="Opacity" Value="0.5" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    <ListBox Name="lstIgnoreEmails" Height="50" SelectionMode="Multiple" SelectionChanged="lstIgnoreEmails_SelectionChanged" />
+                                </DockPanel>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Ignore Headers" Name="tabIgnHeaders" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" VerticalAlignment="Stretch">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="0,0,0,3" >
+									Any messages that contain a header listed below will be ignored. They will not be imported and not deleted from the POP server. Wildcard or partial entries will not work, only full headers will be matched.<LineBreak /><Run FontWeight="Bold">Note:</Run> The content of the header will not matter. This only checks for <Run FontWeight="Bold">presence</Run> of the header.
+									<LineBreak />This covers all polling email accounts and application servers.
+									<LineBreak />Do not put the colon, only the header name/text.
+                                </TextBlock>
+                                <Label Grid.Column="0" Grid.Row="1" Content="Add Email Header:" Height="Auto" />
+                                <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True">
+                                    <Button Name="btnAddIgnHeader" Margin="3,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Center" Height="Auto" IsEnabled="False" Click="btnAddTgnHeader_Click">
+                                        <Image SnapsToDevicePixels="True" Width="16" Height="16" Source="/InflectraEmailIntegration;component/Images/ico_add.png">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter Property="Opacity" Value="0.5" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    <TextBox Name="txtNewIgnHeader" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="Auto" TextChanged="txtNewIgnHeader_TextChanged" />
+                                </DockPanel>
+                                <DockPanel Grid.Column="1" Grid.Row="2"  LastChildFill="True" >
+                                    <Button Name="btnDelIgnHeader" Margin="3,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Top" Height="Auto" IsEnabled="False" Click="btnDelIgnHeader_Click">
+                                        <Image SnapsToDevicePixels="True" Width="16" Height="16" Source="/InflectraEmailIntegration;component/Images/ico_delete.png">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter Property="Opacity" Value="0.5" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    <ListBox Name="lstIgnoreHeaders" Height="50" SelectionMode="Multiple" SelectionChanged="lstIgnoreHeader_SelectionChanged" />
+                                </DockPanel>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Ignore Keywords" Name="tabIgnWords" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" VerticalAlignment="Stretch">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="0,0,0,3" >
+									Any messages that contain one or more of the words below - in any version of the message (html, plain text, etc) - will be ignored. They will not be imported and not deleted from the POP server.
+									<LineBreak />This covers all polling email accounts and application servers.
+                                </TextBlock>
+                                <Label Grid.Column="0" Grid.Row="1" Content="Add Keyword:" Height="Auto" />
+                                <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True">
+                                    <Button Name="btnAddIgnWord" Margin="3,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Center" Height="Auto" IsEnabled="False" Click="btnAddIgnWord_Click">
+                                        <Image SnapsToDevicePixels="True" Width="16" Height="16" Source="/InflectraEmailIntegration;component/Images/ico_add.png">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter Property="Opacity" Value="0.5" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    <TextBox Name="txtNewIgnWord" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="Auto" TextChanged="txtNewIgnWord_TextChanged" />
+                                </DockPanel>
+                                <DockPanel Grid.Column="1" Grid.Row="2"  LastChildFill="True" >
+                                    <Button Name="btnDelIgnWord" Margin="3,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Top" Height="Auto" IsEnabled="False" Click="btnDelIgnWord_Click">
+                                        <Image SnapsToDevicePixels="True" Width="16" Height="16" Source="/InflectraEmailIntegration;component/Images/ico_delete.png">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter Property="Opacity" Value="0.5" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    <ListBox Name="lstIgnoreWords" Height="50" SelectionMode="Multiple" SelectionChanged="lstIgnoreWords_SelectionChanged" />
+                                </DockPanel>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="SpamAssassin" Name="tabSpamAss" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" VerticalAlignment="Stretch">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <!-- Text For User -->
+                                    <RowDefinition Height="Auto" />
+                                    <!-- Use SpamAssassin? -->
+                                    <RowDefinition Height="Auto" />
+                                    <!-- SpamAssassin ServerName/IP and Port -->
+                                    <RowDefinition Height="Auto" />
+                                    <!-- Use SpamAssassin Level? / Manually Defined Spam Level -->
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <!-- Text for User -->
+                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="0,0,0,3" >
+                                    <Run>If you have a server that is running SpamAssassin, you can tell the importer to check emails with the SpamAssassin utility. If this is enabled, messages marked as spam will not be imported, and be left on the mail server. You can use SpamAssassin's own spam level, or override the value. Any emails marked with a number equal to or greater than your custom level will not be imported.</Run>
+                                    <LineBreak />
+                                    <Run>For information and support on SpamAssassin, see their website:</Run> <Hyperlink TargetName="http://spamassassin.apache.org/">http://spamassassin.apache.org/</Hyperlink>
+									<LineBreak />This covers all polling email accounts and application servers.
+                                </TextBlock>
+
+                                <!-- Enable SpamAssassin? -->
+                                <Label Grid.Column="0" Grid.Row="1" Content="Enable SpamAssassin:" Height="Auto" />
+                                <CheckBox Grid.Column="1" Grid.Row="1" Name="chkUseSpamAssassin" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="chkUseSpamAssassin_Checked" Unchecked="chkUseSpamAssassin_Checked" />
+
+                                <!-- Server Name/IP and Port -->
+                                <Label Grid.Column="0" Grid.Row="2" Name="lblSpamAss_ServerNamePort" Content="Server IP/Name and Port:" Height="Auto" />
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                                    <TextBox Name="txtSpamAss_ServerName" MinWidth="150" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,4,0" TextChanged="TextBox_TextChanged" />
+                                    <TextBox Name="txtSpamAss_ServerPort" Width="50" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="4,0,0,0" PreviewTextInput="TextBox_PreviewTextInput_IsNumber" TextChanged="TextBox_TextChanged" />
+                                </StackPanel>
+
+                                <!-- Use SpamAssassin Level / Custom Level-->
+                                <Label Grid.Column="0" Grid.Row="3" Name="lblSpamAss_UseSASpam" Content="Use Custom Spam Level?" />
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                                    <CheckBox Name="chkSpamAss_UseCustomSpamLevel" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,15,0" Checked="chkSpamAss_UseCustomSpamLevel_Checked" Unchecked="chkSpamAss_UseCustomSpamLevel_Checked" />
+                                    <Label Name="lblSpamAss_CustomSALevel" Content="Custom Spam Level:" Margin="0,0,4,0" />
+                                    <TextBox Name="txtSpamAss_CustomSALevel" Width="30" VerticalAlignment="Center"  TextChanged="TextBox_TextChanged" />
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

@@ -20,11 +20,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/kronodesk/Services/v1_0/ImportExport.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/kronodesk/Services/v3_0/SoapService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ImportExport.wsdl" MetadataType="Wsdl" ID="6a0286cd-b721-4f59-b33a-65b432408ca1" SourceId="1" SourceUrl="http://localhost/kronodesk/Services/v1_0/ImportExport.svc?wsdl" />
-    <MetadataFile FileName="ImportExport.disco" MetadataType="Disco" ID="77b03303-09e1-4c7c-a7ab-848d0d0192ea" SourceId="1" SourceUrl="http://localhost/kronodesk/Services/v1_0/ImportExport.svc?disco" />
+    <MetadataFile FileName="SoapService1.disco" MetadataType="Disco" ID="97c50fde-c1a7-488b-9e2f-8d85df6bebb8" SourceId="1" SourceUrl="http://localhost/KronoDesk/Services/v3_0/SoapService.svc?disco" />
+    <MetadataFile FileName="SoapService1.wsdl" MetadataType="Wsdl" ID="21bd7b0b-4e20-44e4-b2b1-543054150cf6" SourceId="1" SourceUrl="http://localhost/KronoDesk/Services/v3_0/SoapService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

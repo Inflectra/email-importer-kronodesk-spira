@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Inflectra.KronoDesk.Service.Email.Settings</RootNamespace>
     <AssemblyName>Common</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -62,7 +65,7 @@
     <Compile Include="SettingsStorage_100.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpamAssassinCheck.cs" />
-    <Compile Include="SpiraClientFactory.cs" />
+    <Compile Include="ClientFactory.cs" />
     <Compile Include="StringsEx.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,11 +85,16 @@
     <None Include="dtd\xhtml1-transitional.dtd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\KronoClient\ImportExport.wsdl" />
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteArticle.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteDocument.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteProduct.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteSetting.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteSitemapEntry.datasource">
@@ -98,10 +106,28 @@
     <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteTicketNote.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteTicketPriority.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteTicketResolution.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteTicketStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteTicketType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SpiraClient\ImportExport1.wsdl" />
+    <None Include="Service References\KronoClient\Inflectra.KronoDesk.Service.Email.Settings.KronoClient.RemoteVersion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\KronoClient\SoapService1.wsdl" />
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteArtifactSubscription.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteAssociation.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -120,6 +146,9 @@
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteComment.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteComponent.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteCustomList.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -132,6 +161,9 @@
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteDataMapping.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteDataSyncSystem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteDocument.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -142,6 +174,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteDocumentVersion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteHistoryChange.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteHistoryChangeSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteIncident.datasource">
@@ -159,10 +197,22 @@
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteIncidentType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteLinkedArtifact.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteManualTestRun.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteMessageInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteProject.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteProjectArtifact.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteProjectRole.datasource">
@@ -174,25 +224,79 @@
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRelease.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteReleaseStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteReleaseTestCaseMapping.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteReleaseType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRequirement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRequirementStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRequirementStep.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRequirementTestCaseMapping.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRequirementTestStepMapping.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteRequirementType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteSavedFilter.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteSetting.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteSourceCodeBranch.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteSourceCodeFile.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteSourceCodeFolder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteSourceCodeRevision.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTask.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTaskFolder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTaskStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTaskType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestCase.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestCaseFolder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestCaseParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestCaseStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestCaseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestConfigurationSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestRun.datasource">
@@ -201,27 +305,43 @@
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestSet.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestSetFolder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestSetParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestSetTestCaseMapping.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestSetTestCaseParameter.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestStep.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteTestStepParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteUser.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteUserMessage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteVersion.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteWorkflowIncidentCustomProperties.datasource">
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteWorkflowCustomProperty.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteWorkflowIncidentFields.datasource">
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteWorkflowField.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteWorkflowIncidentTransition.datasource">
+    <None Include="Service References\SpiraClient\Inflectra.KronoDesk.Service.Email.Settings.SpiraClient.RemoteWorkflowTransition.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SpiraClient\SoapService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\KronoClient\" />
@@ -240,9 +360,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\KronoClient\ImportExport.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\KronoClient\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -255,12 +372,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SpiraClient\ImportExport1.disco" />
+    <None Include="Service References\SpiraClient\SoapService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\KronoClient\SoapService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.DeltaBaseDate" BuildVersion_AssemblyInfoFilename="" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="" BuildVersion_BuildVersioningStyle="None.None.None.DeltaBaseDate" BuildVersion_UpdateFileVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

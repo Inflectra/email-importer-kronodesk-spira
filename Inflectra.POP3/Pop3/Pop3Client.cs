@@ -151,20 +151,22 @@ namespace Inflectra.POP3
 		/// <summary>Connects to a remote POP3 server using default timeouts of 60.000 milliseconds</summary>
 		/// <param name="hostname">The <paramref name="hostname"/> of the POP3 server</param>
 		/// <param name="port">The port of the POP3 server</param>
+        /// <param name="sslVersion">If SSL enabled, which version (TLS/SSL)</param>
 		/// <param name="useSsl"><see langword="true"/> if SSL should be used. <see langword="false"/> if plain TCP should be used.</param>
 		/// <exception cref="PopServerNotAvailableException">If the server did not send an OK message when a connection was established</exception>
 		/// <exception cref="PopServerNotFoundException">If it was not possible to connect to the server</exception>
 		/// <exception cref="ArgumentNullException">If <paramref name="hostname"/> is <see langword="null"/></exception>
 		/// <exception cref="ArgumentOutOfRangeException">If port is not in the range [<see cref="IPEndPoint.MinPort"/>, <see cref="IPEndPoint.MaxPort"/></exception>
-		public void Connect(string hostname, int port, bool useSsl)
+		public void Connect(string hostname, int port, bool useSsl, string sslVersion)
 		{
 			const int defaultTimeOut = 60000;
-			Connect(hostname, port, useSsl, defaultTimeOut, defaultTimeOut, null);
+            Connect(hostname, port, useSsl, sslVersion, defaultTimeOut, defaultTimeOut, null);
 		}
 
 		/// <summary>Connects to a remote POP3 server</summary>
 		/// <param name="hostname">The <paramref name="hostname"/> of the POP3 server</param>
 		/// <param name="port">The port of the POP3 server</param>
+        /// <param name="sslVersion">Which SSL version to use</param>
 		/// <param name="useSsl"><see langword="true"/> if SSL should be used. <see langword="false"/> if plain TCP should be used.</param>
 		/// <param name="receiveTimeout">Timeout in milliseconds before a socket should time out from reading. Set to 0 or -1 to specify infinite timeout.</param>
 		/// <param name="sendTimeout">Timeout in milliseconds before a socket should time out from sending. Set to 0 or -1 to specify infinite timeout.</param>
@@ -173,7 +175,7 @@ namespace Inflectra.POP3
 		/// <exception cref="PopServerNotFoundException">If it was not possible to connect to the server</exception>
 		/// <exception cref="ArgumentNullException">If <paramref name="hostname"/> is <see langword="null"/></exception>
 		/// <exception cref="ArgumentOutOfRangeException">If port is not in the range [<see cref="IPEndPoint.MinPort"/>, <see cref="IPEndPoint.MaxPort"/> or if any of the timeouts is less than -1.</exception>
-		public void Connect(string hostname, int port, bool useSsl, int receiveTimeout, int sendTimeout, RemoteCertificateValidationCallback certificateValidator)
+		public void Connect(string hostname, int port, bool useSsl,  string sslVersion, int receiveTimeout, int sendTimeout, RemoteCertificateValidationCallback certificateValidator)
 		{
 			const string METHOD = CLASS + "Connect()";
 
@@ -231,8 +233,27 @@ namespace Inflectra.POP3
 				sslStream.ReadTimeout = receiveTimeout;
 				sslStream.WriteTimeout = sendTimeout;
 
-				// Authenticate the server
-				sslStream.AuthenticateAsClient(hostname);
+				// Authenticate the server (use the right TLS version)
+                System.Security.Authentication.SslProtocols sslProtocol = System.Security.Authentication.SslProtocols.Tls;    //Default to TLS 1.0 for now
+                switch (sslVersion)
+                {
+                    case "Ssl30":
+                        sslProtocol = System.Security.Authentication.SslProtocols.Ssl3;
+                        break;
+
+                    case "Tls10":
+                        sslProtocol = System.Security.Authentication.SslProtocols.Tls;
+                        break;
+
+                    case "Tls11":
+                        sslProtocol = System.Security.Authentication.SslProtocols.Tls11;
+                        break;
+
+                    case "Tls12":
+                        sslProtocol = System.Security.Authentication.SslProtocols.Tls12;
+                        break;
+                }
+                sslStream.AuthenticateAsClient(hostname, null, sslProtocol, true);
 
 				stream = sslStream;
 			}
